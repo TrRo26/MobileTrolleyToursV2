@@ -1,0 +1,250 @@
+﻿.component-wrapper {
+    padding-top: 140px;
+}
+
+.main-text {
+    padding-right: 25px;
+    color: white;
+}
+
+.mobile {
+    display: none;
+}
+
+.card {
+    width: 20rem;
+    margin-bottom: 30px;
+}
+
+a {
+    color: #1a4954;
+    position: relative;
+    color: #000;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #000;
+    }
+
+    a::before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    a:hover::before {
+        transform: scaleX(1);
+    }
+
+.bi-asterisk {
+    display: block;
+    margin: auto;
+    width: 45px;
+    height: 45px;
+    padding-bottom: 15px;
+}
+
+.c-box {
+    background: #1a4954;
+    font-size: 150%;
+    text-align: left;
+    color: #fff;
+    flex-basis: 30%;
+    padding: 3vmin;
+    opacity: 70%;
+    border-radius: 3px;
+}
+
+.c-box--arrow-left {
+    position: relative;
+    z-index: 10;
+}
+
+    .c-box--arrow-left::after {
+        content: "";
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border: 0;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        margin-top: -20px;
+        top: 50%;
+        border-right: 20px solid #587b7f;
+        left: -20px;
+    }
+
+.c-box--arrow-bottom {
+    position: relative;
+    z-index: 10;
+}
+
+    .c-box--arrow-bottom::after {
+        content: "";
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        margin-left: -10px;
+        left: 50%;
+        border-top: 10px solid #587b7f;
+        bottom: -10px;
+    }
+
+@media screen and (max-width: 576px) {
+    .component-wrapper {
+        padding-top: 25px;
+    }
+
+    .c-box {
+        margin-top: 50px;
+    }
+
+    .main-text {
+        text-align: center;
+        padding-right: 25px;
+        color: white;
+        font-size: 20px;
+    }
+
+    .bi-asterisk {
+        width: 35px;
+        height: 35px;
+        padding-bottom: 15px;
+    }
+
+    .mobile {
+        margin-bottom: 20px;
+        display: block;
+        width: 100%;
+    }
+
+    .desktop {
+        display: none !important;
+    }
+
+    .card {
+        padding: 3px;
+        width: 48%;
+        display: inline-block;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-text {
+        display: block;
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .first {
+        margin-right: 7px;
+    }
+
+    .second {
+        margin-left: 7px;
+    }
+}
+
+
+/*
+.c-box--arrow-top {
+    position: relative;
+    z-index: 10;
+}
+
+    .c-box--arrow-top::after {
+        content: "";
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        margin-left: -10px;
+        left: 50%;
+        border-bottom: 10px solid #587b7f;
+        top: -10px;
+    }
+
+.c-box--arrow-right {
+    position: relative;
+    z-index: 10;
+}
+
+    .c-box--arrow-right::after {
+        content: "";
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        margin-top: -10px;
+        top: 50%;
+        border-left: 10px solid #587b7f;
+        left: auto;
+        right: -10px;
+    }
+
+.c-box--arrow-bottom {
+    position: relative;
+    z-index: 10;
+}
+
+    .c-box--arrow-bottom::after {
+        content: "";
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        margin-left: -10px;
+        left: 50%;
+        border-top: 10px solid #587b7f;
+        bottom: -10px;
+    }
+
+.c-box--arrow-left {
+    position: relative;
+    z-index: 10;
+}
+
+    .c-box--arrow-left::after {
+        content: "";
+        width: 0;
+        height: 0;
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        margin-top: -10px;
+        top: 50%;
+        border-right: 10px solid #587b7f;
+        left: -10px;
+    }*/

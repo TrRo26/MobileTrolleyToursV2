@@ -1,0 +1,73 @@
+﻿@using System.Linq;
+@using MobileTrolleyTours.Data;
+@using MobileTrolleyTours.Models.Enums;
+
+<div id="sched-changes" class="nav-wrapper">
+    <ul class="nav justify-content-center">
+        <li class="changes">
+
+            @*<p>
+            There will be no tours during this time <span class="white-text">*</span>.
+            <br />
+            <p class="footnote"><span class="white-text">*</span> Some dates will be available for group or event tours. Please call 251-633-0560 x5 for details.</p>
+        </p>*@
+
+            <p class="alert-box-header">
+                @ScheduleAlertService.GetAlertBoxHeader().Description
+            </p>
+
+            <p class="alert-box-sub-header footnote">
+                @ScheduleAlertService.GetAlertBoxSubHeader().Description
+            </p>
+
+            @{
+                var alerts = ScheduleAlertService.GetActiveAlerts();
+                var alertItemsExist = alerts.Where(a => a.PartitionKey == PartitionKeys.AlertBoxItem).Any();
+
+                @if (alertItemsExist)
+                {
+                    <tr>
+                        <th>Start Date</th>
+                        <th style="white-space: nowrap">End Date</th>
+                        <th>Notice</th>
+                    </tr>
+                }
+
+                @foreach (var alert in alerts)
+                {
+                    <tr class="alert-box-item">
+                        <td>
+                            @String.Format("{0:dddd, MMMM d, yyyy}", alert.StartDate)
+                        </td>
+
+                        @if (alert.EndDate == null)
+                        {
+                            <td>
+                                - - - - - -
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @String.Format("{0:dddd, MMMM d, yyyy}", alert.EndDate)
+                            </td>
+                        }
+
+                        <td>
+                            @alert.Description
+                        </td>
+                    </tr>
+                }
+
+                <p class="alert-box-footer footnote">
+                    @ScheduleAlertService.GetAlertBoxFooter().Description
+                </p>
+                }
+
+        </li>
+    </ul>
+</div>
+
+@code {
+
+    }

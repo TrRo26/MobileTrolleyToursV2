@@ -1,0 +1,74 @@
+﻿footer-container {
+}
+
+.mobile {
+    display: none;
+}
+
+.left-container {
+}
+
+.center-container {
+    margin-top: 30px;
+    height: 100px;
+}
+
+.right-container {
+}
+
+.badge-container {
+    margin-right: 40px;
+}
+
+.visit-badge-image,
+.trolley-badge-image {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.visit-badge-image {
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.sub-footer {
+    font-size: small;
+}
+
+@media screen and (max-width: 576px) {
+    .desktop {
+        display: none !important;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .visit-badge-image,
+    .trolley-badge-image {
+        max-height: 90%;
+        max-width: 90%;
+    }
+
+    .badge-container {
+        text-align: center;
+        display: inline;
+        margin-right: 0px;
+        height: 100px;
+    }
+
+    .left-container {
+        display: none;
+    }
+
+    .center-container {
+        display: block;
+        margin-top: 30px;
+        height: 50px;
+    }
+
+    .right-container {
+        display: block;
+        font-size: 12px;
+    }
+}

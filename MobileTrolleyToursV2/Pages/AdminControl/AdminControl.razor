@@ -1,0 +1,31 @@
+﻿@page "/admincontrol"
+@*@using MobileTrolleyTours.Pages.AdminControl*@
+
+<div class="main-container">
+
+    <div class="alert-section">
+        <h2>Alert Section Title</h2>
+        <AlertListDisplay PartitionKey="PartitionKeys.AlertBoxHeader" />
+    </div>
+
+    <div class="alert-section">
+        <h2>Alert Section Sub-Title</h2>
+        <AlertListDisplay PartitionKey="PartitionKeys.AlertBoxSubHeader" />
+    </div>
+
+    <div class="alert-section">
+        <h2>Alert Section Items</h2>
+        <AlertListDisplay PartitionKey="PartitionKeys.AlertBoxItem" />
+    </div>
+
+    <div class="alert-section">
+        <h2>Alert Section Sub-Text</h2>
+        <AlertListDisplay PartitionKey="PartitionKeys.AlertBoxFooter" />
+    </div>
+
+</div>
+
+
+@code {
+    
+}

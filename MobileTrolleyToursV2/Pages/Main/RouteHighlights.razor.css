@@ -1,0 +1,51 @@
+﻿.route-highlights-container {
+    padding-left: 50px;
+}
+
+.route-header {
+    padding-bottom: 20px;
+    color: #ffca0b;
+}
+
+.list-timeline {
+    margin: 0;
+    padding: 5px 0;
+    position: relative
+}
+
+    .list-timeline:before {
+        width: 1px;
+        background: #ffca0b;
+        position: absolute;
+        left: 6px;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        content: ''
+    }
+
+    .list-timeline .list-timeline-item {
+        margin: 0;
+        padding: 0;
+        padding-left: 24px !important;
+        position: relative
+    }
+
+        .list-timeline .list-timeline-item:before {
+            width: 12px;
+            height: 12px;
+            background: #1a4954;
+            /* Yellow: #ffca0b;*/
+            /* White: #fff; */
+            border: 2px solid #ccc;
+            position: absolute;
+            left: 0;
+            top: 4px;
+            content: '';
+            border-radius: 100%;
+        }
+
+    /* border of circle bullet points*/
+    .list-timeline.list-timeline-primary .list-timeline-item:before {
+        border-color: #ffca0b;
+    }

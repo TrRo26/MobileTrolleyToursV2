@@ -1,14 +1,17 @@
 ﻿<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
-            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            @*<LayoutView Layout="@typeof(MainLayout)">
+                <p role="alert">FOUND!!!</p>
+            </LayoutView>*@
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MobileTrolleyTours.Shared.MainLayout)" />
             <FocusOnNavigate RouteData="@routeData" Selector="h1" />
         </Found>
         <NotFound>
             <PageTitle>Not found</PageTitle>
-            <LayoutView Layout="@typeof(MainLayout)">
+            @*<LayoutView Layout="@typeof(MainLayout)">
                 <p role="alert">Sorry, there's nothing at this address.</p>
-            </LayoutView>
+            </LayoutView>*@
         </NotFound>
     </Router>
 </CascadingAuthenticationState>

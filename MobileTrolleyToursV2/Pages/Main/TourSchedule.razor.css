@@ -1,0 +1,50 @@
+﻿.component-wrapper {
+    margin-top: 0px;
+}
+
+table-header {
+    font-size: x-large !important;
+}
+
+.badge {
+    margin-right: 10px;
+    color: white;
+    background-color: #1a4954 !important;
+}
+
+@media screen and (max-width: 576px) {
+    .component-wrapper {
+        padding-top: 20px;
+    }
+
+    th {
+        font-size: 16px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table td {
+        display: flex;
+    }
+
+        table td::before {
+            content: attr(label);
+            font-weight: bold;
+            width: 100px;
+            min-width: 100px;
+        }
+
+    table tbody th > span {
+        display: none;
+    }
+
+    .badge {
+        margin-right: 5px;
+    }
+}

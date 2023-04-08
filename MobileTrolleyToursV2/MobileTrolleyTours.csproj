@@ -5,10 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-MobileTrolleyToursV2-3c55d23e-1b9a-47ed-a33f-8a9201e80c0b</UserSecretsId>
+    <AssemblyName>MobileTrolleyToursV2</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <None Remove="Azure.Data.Tables" />
+    <None Remove="bootstrap.sass" />
+    <None Remove="WindowsAzure.Storage" />
+    <!--<None Remove="Models\Database\" />-->
+  </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
   </ItemGroup>
@@ -19,6 +26,18 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0" />
+    <PackageReference Include="Azure.Data.Tables" Version="12.7.0" />
+    <PackageReference Include="bootstrap.sass" Version="5.2.2" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 
+<!--  <ItemGroup>
+    <Content Remove="Pages\Index.razor" />
+  </ItemGroup>-->
+  <ItemGroup>
+    <Folder Include="Models\Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="App2.razor" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,38 @@
+﻿.alert-add-container {
+    margin-top: 5px;
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+    .alert-add-container div {
+        padding: 5px;
+    }
+
+.start-date {
+    display: inline-block;
+}
+
+.end-date {
+    display: inline-block;
+}
+
+::deep .alert-add-description {
+    width: 70%;
+}
+
+.apply-date {
+    display: inline-block;
+}
+
+.revoke-date {
+    display: inline-block;
+}
+
+.add-status {
+    display: inline-block;
+}
+
+.message-to-user {
+
+}

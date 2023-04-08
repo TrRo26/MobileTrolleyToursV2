@@ -1,0 +1,58 @@
+﻿body {
+
+}
+
+.nav-wrapper {
+    margin-top: 30px;
+    margin-bottom: -30px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 15px;
+    background-color: indianred;
+    font-size: 14px;
+}
+
+.changes > p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    /*    font-size: 1.15rem;*/
+    /*    font-weight: bold;*/
+}
+
+.changes span {
+    font-weight: bold;
+}
+
+.footnote {
+    font-size: 14px !important;
+    /*    font-weight: 500;*/
+}
+
+.white-text {
+    color: #ffca0b;
+}
+
+th {
+    padding: 4px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.alert-box-header {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.alert-box-sub-header {
+}
+
+.alert-box-item {
+}
+
+.alert-box-footer {
+    margin-top: 15px;
+    font-size: 12px !important;
+}

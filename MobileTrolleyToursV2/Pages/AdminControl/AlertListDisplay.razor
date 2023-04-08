@@ -1,0 +1,191 @@
+﻿<div class="alert-list-container">
+
+    <tr>
+
+        @if (PartitionKey == PartitionKeys.AlertBoxItem)
+        {
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Notice</th>
+            <td class="table-seperator"></td>
+            <th>Date to Apply Alert</th>
+            <th>Alert Status</th>
+        }
+        else
+        {
+            <th>Notice</th>
+            <td class="table-seperator"></td>
+            <th>Alert Status</th>
+        }
+
+        @*<th>Notice</th>*@
+        @*<td class="table-seperator"></td>*@
+        @*<th>Date to Apply Alert</th>*@
+        @*<th>Date to Hide Alert</th>*@
+        @*<th>Alert Status</th>*@
+    </tr>
+
+    @foreach (var alert in alerts)
+    {
+        string backgroundColor = "none";
+        string strikeThrough = "none";
+        string bold = "none";
+
+
+        if (alert.Status == ScheduleAlertStatus.Active)
+        {
+            backgroundColor = "lightgreen";
+        }
+        else if (alert.Status == ScheduleAlertStatus.Pending)
+        {
+            backgroundColor = "lightyellow";
+        }
+
+        <tr class="alert-box-item">
+
+            @if (PartitionKey == PartitionKeys.AlertBoxItem)
+            {
+                <td style="background-color:@backgroundColor">
+                    @String.Format("{0:dddd, MMMM d, yyyy}", alert.StartDate)
+                </td>
+                <td style="background-color:@backgroundColor">
+                    @String.Format("{0:dddd, MMMM d, yyyy}", alert.EndDate)
+                </td>
+            }
+
+            <td style="background-color:@backgroundColor">
+                @alert.Description
+            </td>
+
+            <td class="table-seperator"></td>
+
+            @if (PartitionKey == PartitionKeys.AlertBoxItem)
+            {
+                if (alert.Status != ScheduleAlertStatus.Pending)
+                {
+                    strikeThrough = "line-through";
+                }
+                else
+                {
+                    bold = "bold";
+                }
+
+                <td style="background-color:@backgroundColor; text-decoration:@strikeThrough; font-weight: @bold">
+                    @String.Format("{0:dddd, MMMM d, yyyy}", alert.ApplyDate)
+                </td>
+            }
+
+            @*<td style="background-color:@backgroundColor">
+            @String.Format("{0:dddd, MMMM d, yyyy}", alert.RevokeDate)
+            </td>*@
+
+            <td id="@alert.AlertId" style="background-color:@backgroundColor">
+
+                <EditForm Model="@alert">
+                    <InputSelect @bind-Value="@alert.Status" @bind:after="@OnStatusUpdate(PartitionKey, alert.AlertId, alert.Status)" id="item-list-status" required>
+                        <option value="@ScheduleAlertStatus.Active">Active</option>
+                        @if (PartitionKey == PartitionKeys.AlertBoxItem)
+                        {
+                            <option value="@ScheduleAlertStatus.Pending">Pending</option>
+                        }
+                        <option value="@ScheduleAlertStatus.Inactive">Inactive</option>
+                        <option value="@ScheduleAlertStatus.Deleted">Delete</option>
+                    </InputSelect>
+                </EditForm>
+
+            </td>
+        </tr>
+
+    }
+
+    <div id="button-container" class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button @onclick="e => this.Collapsed = !this.Collapsed" class="btn-add-new-alert btn btn-sm shadow-none">
+            @( this.Collapsed ? "Add New Alert" : "Cancel")
+        </button>
+    </div>
+
+    <AlertAddDisplay PartitionKey="@PartitionKey" Collapse="@( this.Collapsed ? "collapse": "")" />
+
+
+</div>
+
+@code {
+
+    [Parameter]
+    public PartitionKeys PartitionKey { get; set; }
+
+    IOrderedEnumerable<ScheduleChangeData>? alerts;
+    Dictionary<Guid, ScheduleAlertStatus>? currentAlertsState = new Dictionary<Guid, ScheduleAlertStatus>();
+    private bool firstRender = true;
+    private bool Collapsed = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    public EventCallback OnStatusUpdate(PartitionKeys partitionKey, Guid alertId, ScheduleAlertStatus status)
+    {
+        var currentAlertState = currentAlertsState[alertId];
+
+        if (currentAlertState == status)
+        {
+            return new EventCallback();
+        }
+        else
+        {
+            currentAlertsState[alertId] = status;
+        }
+
+        var updateAlert = new ScheduleChangeData
+        {
+            PartitionKey = partitionKey,
+            AlertId = alertId,
+            Status = status
+        };
+
+        try
+        {
+            if (status == ScheduleAlertStatus.Active &&
+                    (partitionKey == PartitionKeys.AlertBoxHeader ||
+                     partitionKey == PartitionKeys.AlertBoxFooter ||
+                     partitionKey == PartitionKeys.AlertBoxSubHeader))
+            {
+                var activeAlert = ScheduleAlertService.GetActiveAlerts(PartitionKey).FirstOrDefault();
+
+                if (activeAlert != null)
+                {
+                    activeAlert.Status = ScheduleAlertStatus.Inactive;
+                    ScheduleAlertService.UpdateAlertStatus(activeAlert);
+                }
+            }
+
+            ScheduleAlertService.UpdateAlertStatus(updateAlert);
+        }
+        catch (Exception)
+        {
+            
+        }
+
+        // TO-DO:  Can I use this to update UI (remove deleted alerts)
+        return new EventCallback();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (PartitionKey > 0 && firstRender)
+        {
+            alerts = ScheduleAlertService.GetAllAlerts(PartitionKey);
+            firstRender = false;
+
+            // Add current alert state to dictionary so can check for changes on user interaction
+            foreach (var alert in alerts)
+            {
+                currentAlertsState.Add(alert.AlertId, alert.Status);
+            }
+
+            StateHasChanged();
+        }
+    }
+
+}

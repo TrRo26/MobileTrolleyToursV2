@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1705.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileTrolleyToursV2", "MobileTrolleyToursV2\MobileTrolleyToursV2.csproj", "{3375C6D7-6066-4F0F-A753-4B60F575DBDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileTrolleyTours", "MobileTrolleyToursV2\MobileTrolleyTours.csproj", "{3375C6D7-6066-4F0F-A753-4B60F575DBDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,59 @@
+﻿/*Green:    #1a4954 */
+/*Yellow:   #ffca0b */
+
+.alert-banner-padding {
+    margin-top: 0px;
+}
+
+.container {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%231a4954' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.main-headline {
+    color: #1a4954;
+}
+
+.main-image-container {
+    overflow: visible;
+}
+
+.button {
+    border: 1px solid #1a4954;
+    color: white;
+}
+
+#button-container a {
+    text-transform: uppercase !important;
+    border: 1px solid #1a4954;
+    color: #1a4954;
+}
+
+    #button-container a:hover {
+        background-color: #1a4954;
+        color: white;
+    }
+
+.sm > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.mtt-award {
+    margin-top: -30px;
+    margin-left: -30px;
+    padding-bottom: 35px;
+}
+
+@media (max-width: 991px) {
+    .mtt-award {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 50%;
+    }
+}

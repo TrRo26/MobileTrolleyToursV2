@@ -1,0 +1,47 @@
+﻿/*
+REMEMBER TO REMOVE .alert-banner-padding in Hero component when removing banner
+*/
+
+.nav-wrapper {
+    width: 100%;
+    position: fixed;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    z-index: 100;
+}
+
+.nav {
+    padding: 8px;
+    background-color: indianred;
+}
+
+    .nav span {
+        font-weight: bold;
+    }
+
+p {
+    margin-bottom: 3px;
+}
+
+button {
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+button:hover {
+    background-color: #1a4954;
+    color: white;
+}
+
+@media screen and (max-width: 576px) {
+    .nav {
+        padding-left: 30px;
+        padding-right: 30px;
+        font-size: 12px;
+    }
+}
