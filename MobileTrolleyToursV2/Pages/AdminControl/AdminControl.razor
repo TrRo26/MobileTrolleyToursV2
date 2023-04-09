@@ -1,5 +1,5 @@
-﻿@page "/admincontrol"
-@*@using MobileTrolleyTours.Pages.AdminControl*@
+﻿@attribute [Authorize]
+@page "/admincontrol"
 
 <div class="main-container">
 
@@ -27,5 +27,11 @@
 
 
 @code {
-    
+
+    protected override async Task OnInitializedAsync()
+    {
+        var storageConfig = new AzureStorageConfig();
+        var isInitialized = TableStorageService.Initialize(storageConfig.TableTourScheduleChanges);
+    }
+
 }

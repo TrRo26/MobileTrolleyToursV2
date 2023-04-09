@@ -2,6 +2,11 @@
     margin-top: 0px;
 }
 
+.tour-schedule-title {
+    font-size: 30px;
+    text-align: center;
+}
+
 table-header {
     font-size: x-large !important;
 }

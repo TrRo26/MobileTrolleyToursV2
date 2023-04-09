@@ -1,0 +1,69 @@
+﻿@page "/login"
+@attribute [AllowAnonymous]
+
+<div class="main-container">
+
+    @if (!isAuthenticated)
+    {
+        <div>
+            <p class="user-message">@userMessage</p>
+        </div>
+
+        <div class="user-login text-center">
+            <EditForm class="form-signin mb-4" Model="@_credential" OnSubmit="@Authenticate">
+                <div class="form-group">
+                    <InputText class="form-control" id="user-name" aria-describedby="emailHelp" placeholder="User Name" @bind-Value=@_credential.UserName />
+                </div>
+                <div class="form-group">
+                    <InputText type="password" class="form-control" id="password" placeholder="Password" @bind-Value=@_credential.Password />
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="login" name="login" class="btn btn-primary">Login</button>
+                </div>
+            </EditForm>
+        </div>
+    }
+
+    @if (isAuthenticated)
+    {
+        <div class="admin-title">
+            <p>>> @_credential.UserName</p>
+        </div>
+
+        <AdminControl />
+    }
+</div>
+
+
+@code {
+
+    public class Credential { public string UserName { get; set; } = ""; public string Password { get; set; } = ""; }
+    private Credential _credential = new Credential();
+    private bool isAuthenticated;
+    private string userMessage;
+
+    private void Authenticate()
+    {
+        var storageConfig = new AzureStorageConfig();
+        var isInitialized = TableStorageService.Initialize(storageConfig.TableUsers);
+
+        var users = UserService.GetAllUsers();
+        var userAttemptingLogin = users.Where(u => u.UserName == _credential.UserName).FirstOrDefault();
+
+        if (userAttemptingLogin == null)
+        {
+            return;
+        }
+
+        var encryptedUserEntry = EncryptionService.Encrypt(_credential.Password, "a");
+
+        if (userAttemptingLogin.PasswordHash == encryptedUserEntry)
+        {
+            isAuthenticated = true;
+        }
+        else
+        {
+            userMessage = "Login attempt failed. Please try again.";
+        }
+    }
+}

@@ -23,12 +23,20 @@
             @{
                 var alerts = ScheduleAlertService.GetActiveAlerts();
                 var alertItemsExist = alerts.Where(a => a.PartitionKey == PartitionKeys.AlertBoxItem).Any();
+                var endDatesExist = alerts.Where(a => a.EndDate != null).Any();
 
                 @if (alertItemsExist)
                 {
                     <tr>
-                        <th>Start Date</th>
-                        <th style="white-space: nowrap">End Date</th>
+                        @if (endDatesExist)
+                        {
+                            <th>Start Date</th>
+                            <th style="white-space: nowrap">End Date</th>
+                        }
+                        else
+                        {
+                            <th>Date</th>
+                        }
                         <th>Notice</th>
                     </tr>
                 }
@@ -40,17 +48,20 @@
                             @String.Format("{0:dddd, MMMM d, yyyy}", alert.StartDate)
                         </td>
 
-                        @if (alert.EndDate == null)
+                        @if (endDatesExist)
                         {
-                            <td>
-                                - - - - - -
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @String.Format("{0:dddd, MMMM d, yyyy}", alert.EndDate)
-                            </td>
+                            @if (alert.EndDate == null)
+                            {
+                                <td>
+                                    - - - - - -
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @String.Format("{0:dddd, MMMM d, yyyy}", alert.EndDate)
+                                </td>
+                            }
                         }
 
                         <td>

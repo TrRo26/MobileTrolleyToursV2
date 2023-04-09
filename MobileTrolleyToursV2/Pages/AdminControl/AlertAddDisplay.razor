@@ -27,22 +27,32 @@
                 <label for="description">Notice*:</label>
                 <InputTextArea @bind-Value="@newAlert.Description" class="alert-add-description" required />
             </div>
-            <div class="apply-date">
-                <label for="applyate">Date to Apply Notice:</label>
-                <InputDate TValue="DateTimeOffset?" @bind-Value="@newAlert.ApplyDate" class="alert-add-applyDate" />
-            </div>
+
+            @if (PartitionKey == PartitionKeys.AlertBoxItem)
+            {
+                <div class="apply-date">
+                    <label for="applyate">Date to Apply Notice:</label>
+                    <InputDate TValue="DateTimeOffset?" @bind-Value="@newAlert.ApplyDate" class="alert-add-applyDate" />
+                </div>
+            }
+
             @*<div class="revoke-date">
-                <label for="revokeDate">Date to Hide Notice:</label>
-                <InputDate TValue="DateTimeOffset?" @bind-Value="@newAlert.RevokeDate" class="alert-add-revokeDate" />
+            <label for="revokeDate">Date to Hide Notice:</label>
+            <InputDate TValue="DateTimeOffset?" @bind-Value="@newAlert.RevokeDate" class="alert-add-revokeDate" />
             </div>*@
+
             <div class="status">
                 <label for="status">Status*:</label>
-                <InputSelect @bind-Value="@newAlert.Status" class="alert-add-status" required>
+                <InputSelect @bind-Value="@newAlert.Status" class="alert-add-status" default="@ScheduleAlertStatus.Active" required>
                     <option value="@ScheduleAlertStatus.Active">Active</option>
-                    <option value="@ScheduleAlertStatus.Pending">Pending</option>
+                    @if (PartitionKey == PartitionKeys.AlertBoxItem)
+                    {
+                        <option value="@ScheduleAlertStatus.Pending">Pending</option>
+                    }
                     <option value="@ScheduleAlertStatus.Inactive">Inactive</option>
                 </InputSelect>
             </div>
+
             <div class="">
                 <input type="submit" value="Add Alert">
             </div>
