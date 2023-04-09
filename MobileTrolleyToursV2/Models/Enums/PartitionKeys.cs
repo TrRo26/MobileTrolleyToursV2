@@ -8,6 +8,7 @@ namespace MobileTrolleyTours.Models.Enums
         AlertBoxHeader = 1,
         AlertBoxSubHeader = 2,
         AlertBoxItem = 3,
-        AlertBoxFooter = 4
+        AlertBoxFooter = 4,
+        User = 100
     }
 }
