@@ -1,34 +1,38 @@
-﻿@*@layout LoginLayout*@
-@page "/login"
+﻿@page "/login"
 @attribute [AllowAnonymous]
 
-@if (!isAuthenticated)
-{
-    <div class="user-login text-center">
-        <EditForm class="form-signin mb-4" Model="@_credential" OnSubmit="@Authenticate">
-            <div class="form-group">
-                <label for="user-name">User name</label>
-                <InputText class="form-control" id="user-name" aria-describedby="emailHelp" placeholder="Indirizzo e-mail" @bind-Value=@_credential.UserName />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <InputText type="password" class="form-control" id="password" placeholder="Password" @bind-Value=@_credential.Password />
-            </div>
-            <div class="form-group">
-                <button type="submit" id="login" name="login" class="btn btn-primary">Login</button>
-            </div>
-        </EditForm>
-    </div>
-}
+<div class="main-container">
 
-@if (isAuthenticated)
-{
-    <div class="admin-title">
-        <p>>> @_credential.UserName</p>
-    </div>
+    @if (!isAuthenticated)
+    {
+        <div>
+            <p class="user-message">@userMessage</p>
+        </div>
 
-    <AdminControl />
-}
+        <div class="user-login text-center">
+            <EditForm class="form-signin mb-4" Model="@_credential" OnSubmit="@Authenticate">
+                <div class="form-group">
+                    <InputText class="form-control" id="user-name" aria-describedby="emailHelp" placeholder="User Name" @bind-Value=@_credential.UserName />
+                </div>
+                <div class="form-group">
+                    <InputText type="password" class="form-control" id="password" placeholder="Password" @bind-Value=@_credential.Password />
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="login" name="login" class="btn btn-primary">Login</button>
+                </div>
+            </EditForm>
+        </div>
+    }
+
+    @if (isAuthenticated)
+    {
+        <div class="admin-title">
+            <p>>> @_credential.UserName</p>
+        </div>
+
+        <AdminControl />
+    }
+</div>
 
 
 @code {
@@ -36,6 +40,7 @@
     public class Credential { public string UserName { get; set; } = ""; public string Password { get; set; } = ""; }
     private Credential _credential = new Credential();
     private bool isAuthenticated;
+    private string userMessage;
 
     private void Authenticate()
     {
@@ -50,9 +55,15 @@
             return;
         }
 
-        if (userAttemptingLogin.PasswordHash == _credential.Password)
+        var encryptedUserEntry = EncryptionService.Encrypt(_credential.Password, "a");
+
+        if (userAttemptingLogin.PasswordHash == encryptedUserEntry)
         {
             isAuthenticated = true;
+        }
+        else
+        {
+            userMessage = "Login attempt failed. Please try again.";
         }
     }
 }
