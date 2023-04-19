@@ -241,12 +241,12 @@ namespace MobileTrolleyTours.Data
                 // If alert doesn't have an EndDate, set to inactive the day after StartDate
                 if (alert.EndDate == null)
                 {
-                    if (alert.StartDate >= currentDate.AddDays(1))
+                    if (alert.StartDate <= currentDate.AddDays(1))
                     {
                         alert.Status = ScheduleAlertStatus.Inactive;
                     }
                 }
-                else if (alert.EndDate >= currentDate.AddDays(1))
+                else if (alert.EndDate <= currentDate.AddDays(1))
                 {
                     alert.Status = ScheduleAlertStatus.Inactive;
                 }
